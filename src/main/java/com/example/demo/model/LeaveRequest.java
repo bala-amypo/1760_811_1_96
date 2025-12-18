@@ -8,12 +8,25 @@ public class LeaveRequest {
    @Id
    private Long id;
 
+  
    EmployeeProfile employee;
    private Date startDate;
    private Date endDate;
    private String type;
    private String status;
    private String reason;
+
+   public LeaveRequest(Long id, EmployeeProfile employee, Date startDate, Date endDate, String type, String status,
+        String reason) {
+    this.id = id;
+    this.employee = employee;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.type = type;
+    this.status = status;
+    this.reason = reason;
+}
+
    public Long getId() {
     return id;
    }
