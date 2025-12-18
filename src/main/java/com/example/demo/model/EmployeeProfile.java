@@ -7,13 +7,26 @@ import jakarta.persistence.Id;
 
 public class EmployeeProfile {
     @Id
+
     private Long id;
     private String employeeId;
     private String fullname;
+  
     private String email;
     private String teamName;
     private boolean active;
     private Date createdAt;
+    
+    public EmployeeProfile(Long id, String employeeId, String fullname, String email, String teamName, boolean active,
+            Date createdAt) {
+        this.id = id;
+        this.employeeId = employeeId;
+        this.fullname = fullname;
+        this.email = email;
+        this.teamName = teamName;
+        this.active = active;
+        this.createdAt = createdAt;
+    }
     public Long getId() {
         return id;
     }
