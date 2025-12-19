@@ -7,5 +7,7 @@ public class LeaveRequest {
     private Date endDate;
     private String type;
     private String status;
+    private String reason;
+
     
 }
