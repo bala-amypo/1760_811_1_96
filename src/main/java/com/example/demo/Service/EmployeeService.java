@@ -6,10 +6,10 @@ import com.example.demo.model.EmployeeProfile;
 
 public interface EmployeeService {
 
-    public EmployeeProfile addEmployeeProfiles(EmployeeProfile emp);
+    public EmployeeProfile create(EmployeeProfile emp);
     public List<EmployeeProfile> getByTeam(String team);
     public EmployeeProfile getById(Long id);
-    public List<EmployeeProfile> getEmployeeProfiles();
-    public EmployeeProfile updateEmployeeProfiles(Long id, EmployeeProfile emp);
-    public void deleteEmployeeProfiles(Long id);
+    public List<EmployeeProfile> getAll();
+    public EmployeeProfile update(Long id, EmployeeProfile emp);
+    public void deactivate(Long id);
 }

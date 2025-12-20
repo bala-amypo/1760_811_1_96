@@ -19,15 +19,15 @@ public class EmployeeProfileService implements EmployeeService {
     private EmployeeProfileRepository repo;
 
    @Override
-    public EmployeeProfile addEmployeeProfiles(EmployeeProfile emp) {
+    public EmployeeProfile create(EmployeeProfile emp) {
         
-        
+        emp.setId(null);
         return repo.save(emp);
     }
 
 
     @Override
-    public List<EmployeeProfile> getEmployeeProfiles() {
+    public List<EmployeeProfile> getAll() {
         return repo.findAll();
     }
     @Override
@@ -35,7 +35,7 @@ public class EmployeeProfileService implements EmployeeService {
         return repo.findByTeamName(team);
     }
     @Override
-    public EmployeeProfile updateEmployeeProfiles(Long id,EmployeeProfile emp) { 
+    public EmployeeProfile update(Long id,EmployeeProfile emp) { 
         emp.setId(id);
         return repo.save(emp);
     }
@@ -44,7 +44,11 @@ public class EmployeeProfileService implements EmployeeService {
         return repo.findById(id).orElse(null);
     }
     @Override
-    public void deleteEmployeeProfiles(Long id) {
-        repo.deleteById(id);
+    public void deactivate(Long id) {
+         EmployeeProfile emp = repo.findById(id)
+        .orElseThrow(() -> new RuntimeException("Employee not found with id " + id));
+        emp.setActive(false);
+        repo.save(emp);
+
     }
 }

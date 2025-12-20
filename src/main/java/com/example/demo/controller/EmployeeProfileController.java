@@ -26,15 +26,15 @@ public class EmployeeProfileController {
     EmployeeService ser;
 
     @PostMapping("/add")
-    public EmployeeProfile addEmployeeProfile(@RequestBody EmployeeProfile entity) {
+    public EmployeeProfile create(@RequestBody EmployeeProfile entity) {
         
 
-        return ser.addEmployeeProfiles(entity);
+        return ser.create(entity);
     }
 
-    @GetMapping("/get")
-    public List<EmployeeProfile> getEmployeeProfiles() {
-        return ser.getEmployeeProfiles();
+    @GetMapping("/getAll")
+    public List<EmployeeProfile> getAll() {
+        return ser.getAll();
     }
 
     @GetMapping("/get/{id}")
@@ -43,15 +43,15 @@ public class EmployeeProfileController {
     }
     
    @PutMapping("/update/{id}")
-public EmployeeProfile updateEmployeeProfile(
+public EmployeeProfile update(
         @PathVariable Long id,
         @RequestBody EmployeeProfile entity) {
-    return ser.updateEmployeeProfiles(id, entity);
+    return ser.update(id, entity);
 }
 
-    @DeleteMapping("/del")
-    public void deleteEmployeeProfile(@RequestParam Long id) {
-      ser.deleteEmployeeProfiles(id);
+    @DeleteMapping("/deactivate")
+    public void deactivate(@RequestParam Long id) {
+      ser.deactivate(id);
     }
     @GetMapping("/getByTeam")
     public List<EmployeeProfile> getByTeam(@RequestParam String team) { 
