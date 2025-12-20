@@ -2,16 +2,24 @@ package com.example.demo.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+// import lombok.Data;
 
 @Entity
+// @Data
 @Table(name = "employee_profiles")
 public class EmployeeProfile {
     @Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+
     private String employeeId;
     private String fullname;
   
@@ -22,9 +30,9 @@ public class EmployeeProfile {
     
     public EmployeeProfile() {
     }
-    public EmployeeProfile(Long id, String employeeId, String fullname, String email, String teamName, boolean active,
+    public EmployeeProfile( String employeeId, String fullname, String email, String teamName, boolean active,
             Date createdAt) {
-        this.id = id;
+        
         this.employeeId = employeeId;
         this.fullname = fullname;
         this.email = email;
