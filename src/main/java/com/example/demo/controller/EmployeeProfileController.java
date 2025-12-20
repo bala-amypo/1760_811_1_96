@@ -50,9 +50,9 @@ public EmployeeProfile update(
 }
 
     @DeleteMapping("/deactivate")
-    public string deactivate(@RequestParam Long id) {
+    public String deactivate(@RequestParam Long id) {
       ser.deactivate(id);
-      return id+"th record deactivated Successfully"; 
+      return  "record deactivated Successfully"; 
     }
     @GetMapping("/getByTeam")
     public List<EmployeeProfile> getByTeam(@RequestParam String team) { 
