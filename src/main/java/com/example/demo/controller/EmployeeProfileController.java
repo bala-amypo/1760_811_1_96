@@ -25,7 +25,7 @@ public class EmployeeProfileController {
     @Autowired
     EmployeeService ser;
 
-    @PostMapping("/add")
+    @PostMapping("/create")
     public EmployeeProfile create(@RequestBody EmployeeProfile entity) {
         
 
@@ -50,8 +50,9 @@ public EmployeeProfile update(
 }
 
     @DeleteMapping("/deactivate")
-    public void deactivate(@RequestParam Long id) {
+    public string deactivate(@RequestParam Long id) {
       ser.deactivate(id);
+      return id+"th record deactivated Successfully"; 
     }
     @GetMapping("/getByTeam")
     public List<EmployeeProfile> getByTeam(@RequestParam String team) { 
