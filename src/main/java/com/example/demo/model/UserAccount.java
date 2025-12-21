@@ -4,4 +4,6 @@ private String username;
 @Coloumn(unique=true)
 private String email;
 private String password;
-private String 
+private String role;
+@OnetoOne
+private employeeProfile emp;
