@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Service.LeaveRequestService;
 import com.example.demo.model.LeaveRequest;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,7 +22,7 @@ public class LeaveRequestContoller {
     LeaveRequestService lrq;
 
     @PostMapping("/create")
-    public LeaveRequest create(@RequestBody LeaveRequest lq) {
+    public LeaveRequest create(@org.springframework.web.bind.annotation.RequestBody LeaveRequest lq) {
         return lrq.create(lq);
     }
     @GetMapping("/approve")
