@@ -1,0 +1,2 @@
+@ID
+private Long id;
