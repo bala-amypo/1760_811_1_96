@@ -17,6 +17,6 @@ public class TeamCapacityServiceImpl implements TeamCapacityService {
     @Override
     public String getAlert(String teamName){
         // Implementation logic here
-        return "Your team: " + teamName+"has low capacity workers so leave request has been cancelled.";
+        return "Your team: " + teamName+" has low capacity workers so leave request has been cancelled.";
     }
 }
