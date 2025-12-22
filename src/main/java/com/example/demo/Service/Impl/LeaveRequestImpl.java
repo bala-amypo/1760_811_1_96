@@ -6,20 +6,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Service.LeaveRequestService;
-// import com.example.demo.model.EmployeeProfile;
+import com.example.demo.model.EmployeeProfile;
 import com.example.demo.model.LeaveRequest;
 import com.example.demo.repository.LeaveRequestRepository;
-// import com.example.demo.repository.EmployeeProfileRepository;
+import com.example.demo.repository.EmployeeProfileRepository;
+import com.example.demo.exception.ResourceNotFoundException;
 @Service
 public class LeaveRequestImpl implements LeaveRequestService{
     @Autowired
     LeaveRequestRepository repo;
 
-    // @Autowired
-    // EmployeeProfileRepository emprepo;
+    @Autowired
+    EmployeeProfileRepository emprepo;
 
     @Override
     public LeaveRequest create(LeaveRequest lq) {
+        // If client provided employeeId use it to fetch EmployeeProfile
+        if (lq.getEmployeeId() != null) {
+            EmployeeProfile emp = emprepo.findById(lq.getEmployeeId())
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + lq.getEmployeeId()));
+            lq.setEmployee(emp);
+        } else if (lq.getEmployee() == null) {
+            throw new ResourceNotFoundException("Employee information missing");
+        }
+        if (lq.getStatus() == null) {
+            lq.setStatus("PENDING");
+        }
        return repo.save(lq);
     }
      @Override

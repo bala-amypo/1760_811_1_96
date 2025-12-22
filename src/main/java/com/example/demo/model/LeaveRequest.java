@@ -3,11 +3,13 @@ package com.example.demo.model;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -21,7 +23,15 @@ public class LeaveRequest {
     private Long id;
     @ManyToOne
     private EmployeeProfile employee;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Long employeeId;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date startDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date endDate;
     private String type;
     private String status;
@@ -51,6 +61,12 @@ public class LeaveRequest {
     }
     public void setEmployee(EmployeeProfile employee) {
         this.employee = employee;
+    }
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+    public void setEmployeeId(Long employeeId) {
+        this.employeeId = employeeId;
     }
     public Date getStartDate() {
         return startDate;
