@@ -28,7 +28,8 @@ private EmployeeProfile emp;
 public UserAccount() {
 }
 
-public UserAccount(String username, String email, String password, String role, EmployeeProfile emp) {
+public UserAccount(Long id,String username, String email, String password, String role, EmployeeProfile emp) {
+    this.id=id;
     this.username = username;
     this.email = email;
     this.password = password;
