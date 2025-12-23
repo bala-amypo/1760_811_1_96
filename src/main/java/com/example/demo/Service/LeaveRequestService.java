@@ -7,5 +7,5 @@ public interface LeaveRequestService {
     public void approve(Long id);
     public void reject(Long id);
     // public LeaveRequest getByEmployee(String empid);
-    // public List<LeaveRequest> getByOverlappingForTeam(LeaveRequest lq);
+    public List<LeaveRequest> getLeaveByEmployee(int id);
 }
