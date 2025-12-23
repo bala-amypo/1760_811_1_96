@@ -18,8 +18,8 @@ public class AuthServiceImpl implements AuthService{
         }
         @Override
         public UserAccount register(UserAccount account){
-              
-                return uar.save(account);
+                
+                return(account);
         }
     
 }
