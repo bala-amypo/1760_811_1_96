@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Service.LeaveRequestService;
-import com.example.demo.model.LeaveRequest;
+import com.example.demo.dto.LeaveRequestDto;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -23,7 +23,7 @@ public class LeaveRequestContoller {
     LeaveRequestService lrq;
 
     @PostMapping("/create")
-    public LeaveRequest create(@RequestBody LeaveRequest lq) {
+    public LeaveRequestDto create(@RequestBody LeaveRequestDto lq) {
         return lrq.create(lq);
     }
     @PutMapping("/approve")
