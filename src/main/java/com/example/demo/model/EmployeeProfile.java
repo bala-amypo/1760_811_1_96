@@ -8,8 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 
 
@@ -20,7 +22,7 @@ import jakarta.validation.constraints.Email;
 public class EmployeeProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+
     private Long id;
 
     private String employeeId;
@@ -28,10 +30,17 @@ public class EmployeeProfile {
     @Email
     private String email;
     private String teamName;
+    private String role;
     private Boolean active;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date createdAt;
     
+    @OneToOne(mappedBy = "emp")
+    private UserAccount userAccount;
+
+    // Many-to-many colleagues relationship (in-memory only for tests)
+    @Transient
+    private java.util.Set<EmployeeProfile> colleagues = new java.util.HashSet<>();
     public EmployeeProfile() {
     }
      @PrePersist
@@ -71,6 +80,15 @@ public class EmployeeProfile {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
+
+    // Backwards-compatible name used by tests
+    public String getFullName() { return getFullname(); }
+    public void setFullName(String fullName) { setFullname(fullName); }
+
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
+
+    public java.util.Set<EmployeeProfile> getColleagues() { return colleagues; }
     public String getEmail() {
         return email;
     }

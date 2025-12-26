@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -29,10 +29,10 @@ public class LeaveRequest {
     private Long employeeId;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date startDate;
+    private LocalDate startDate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date endDate;
+    private LocalDate endDate;
     private String type;
     private String status;
     private String reason;
@@ -40,7 +40,7 @@ public class LeaveRequest {
 
     public LeaveRequest() {
     }
-    public LeaveRequest( EmployeeProfile employee, Date startDate, Date endDate, String type, String status,
+    public LeaveRequest( EmployeeProfile employee, LocalDate startDate, LocalDate endDate, String type, String status,
             String reason) {
        
         this.employee = employee;
@@ -68,16 +68,16 @@ public class LeaveRequest {
     public void setEmployeeId(Long employeeId) {
         this.employeeId = employeeId;
     }
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
     public String getType() {
