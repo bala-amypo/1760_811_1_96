@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.Service.LeaveRequestService;
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.EmployeeProfile;
 import com.example.demo.model.LeaveRequest;
 import com.example.demo.repository.LeaveRequestRepository;
 import com.example.demo.repository.EmployeeProfileRepository;
-import com.example.demo.exception.ResourceNotFoundException;
 @Service
 public class LeaveRequestImpl implements LeaveRequestService{
     @Autowired
@@ -20,34 +20,66 @@ public class LeaveRequestImpl implements LeaveRequestService{
     EmployeeProfileRepository emprepo;
 
     @Override
-    public LeaveRequest create(LeaveRequest lq) {
-        // If client provided employeeId use it to fetch EmployeeProfile
-        if (lq.getEmployeeId() != null) {
-            EmployeeProfile emp = emprepo.findById(lq.getEmployeeId())
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + lq.getEmployeeId()));
-            lq.setEmployee(emp);
-        } else if (lq.getEmployee() == null) {
-            throw new ResourceNotFoundException("Employee information missing");
-        }
-        if (lq.getStatus() == null) {
-            lq.setStatus("PENDING");
-        }
-       return repo.save(lq);
+    public com.example.demo.dto.LeaveRequestDto create(com.example.demo.dto.LeaveRequestDto dto) {
+        // Map DTO to entity
+        EmployeeProfile emp = emprepo.findById(dto.getEmployeeId())
+            .orElseThrow(() -> new ResourceNotFoundException("Employee not found with id " + dto.getEmployeeId()));
+        if (dto.getStartDate().isAfter(dto.getEndDate())) throw new com.example.demo.exception.BadRequestException("Invalid date range");
+        LeaveRequest lq = new LeaveRequest();
+        lq.setEmployee(emp);
+        lq.setStartDate(dto.getStartDate());
+        lq.setEndDate(dto.getEndDate());
+        lq.setType(dto.getType());
+        lq.setReason(dto.getReason());
+        lq.setStatus("PENDING");
+        LeaveRequest saved = repo.save(lq);
+        com.example.demo.dto.LeaveRequestDto out = new com.example.demo.dto.LeaveRequestDto();
+        out.setId(saved.getId());
+        out.setStatus(saved.getStatus());
+        return out;
     }
      @Override
-    public void approve(Long id) {
+    public com.example.demo.dto.LeaveRequestDto approve(Long id) {
          LeaveRequest lrq = repo.findById(id)
         .orElseThrow(() -> new RuntimeException("Employee not found with id " + id));
         lrq.setStatus("APPROVED");
-        
-        repo.save(lrq);
+        LeaveRequest saved = repo.save(lrq);
+        com.example.demo.dto.LeaveRequestDto out = new com.example.demo.dto.LeaveRequestDto();
+        out.setId(saved.getId());
+        out.setStatus(saved.getStatus());
+        return out;
     }
      @Override
-    public void reject(Long id) {
+    public com.example.demo.dto.LeaveRequestDto reject(Long id) {
         LeaveRequest lrq = repo.findById(id)
         .orElseThrow(() -> new RuntimeException("Employee not found with id " + id));
         lrq.setStatus("REJECTED");
-        repo.save(lrq);
+        LeaveRequest saved = repo.save(lrq);
+        com.example.demo.dto.LeaveRequestDto out = new com.example.demo.dto.LeaveRequestDto();
+        out.setId(saved.getId());
+        out.setStatus(saved.getStatus());
+        return out;
+    }
+
+    @Override
+    public java.util.List<com.example.demo.dto.LeaveRequestDto> getByEmployee(Long empId) {
+        EmployeeProfile emp = emprepo.findById(empId).orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+        return repo.findByEmployee(emp).stream().map(l -> {
+            com.example.demo.dto.LeaveRequestDto dto = new com.example.demo.dto.LeaveRequestDto();
+            dto.setId(l.getId());
+            dto.setStatus(l.getStatus());
+            return dto;
+        }).collect(java.util.stream.Collectors.toList());
+    }
+
+    @Override
+    public java.util.List<com.example.demo.dto.LeaveRequestDto> getOverlappingForTeam(String team, java.time.LocalDate start, java.time.LocalDate end) {
+        return repo.findApprovedOverlappingForTeam(team, start, end).stream().map(l -> {
+            com.example.demo.dto.LeaveRequestDto dto = new com.example.demo.dto.LeaveRequestDto();
+            dto.setId(l.getId());
+            dto.setStatus(l.getStatus());
+            return dto;
+        }).collect(java.util.stream.Collectors.toList());
     }
     //  @Override
     // public LeaveRequest getByEmployee(String empid) {
