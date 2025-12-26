@@ -8,11 +8,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-// import lombok.Data;
+import jakarta.validation.constraints.Email;
+
+
 
 @Entity
-// @Data
+
 @Table(name = "employee_profiles")
 public class EmployeeProfile {
     @Id
@@ -22,15 +25,25 @@ public class EmployeeProfile {
 
     private String employeeId;
     private String fullname;
-  
+    @Email
     private String email;
     private String teamName;
-    private boolean active;
+    private Boolean active;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Date createdAt;
     
     public EmployeeProfile() {
     }
-    public EmployeeProfile( String employeeId, String fullname, String email, String teamName, boolean active,
+     @PrePersist
+    public void onCreate() {
+        if (active == null) {
+            active = true;
+        }
+        if (createdAt == null) {
+            createdAt = new Date(System.currentTimeMillis());
+        }
+    }
+    public EmployeeProfile( String employeeId, String fullname, String email, String teamName, Boolean active,
             Date createdAt) {
         
         this.employeeId = employeeId;
@@ -70,10 +83,10 @@ public class EmployeeProfile {
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
     public Date getCreatedAt() {

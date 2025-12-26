@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
 
 @Entity
 public class UserAccount {
@@ -18,18 +20,18 @@ public class UserAccount {
 private Long id;
 private String username;
 @Column(unique=true)
+@Email
 private String email;
 private String password;
 private String role;
-@OneToOne
+@OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "employee_profile_id")
 private EmployeeProfile emp;
 
 public UserAccount() {
 }
 
-public UserAccount(Long id,String username, String email, String password, String role, EmployeeProfile emp) {
-    this.id=id;
+public UserAccount(String username, String email, String password, String role, EmployeeProfile emp) {
     this.username = username;
     this.email = email;
     this.password = password;
