@@ -10,4 +10,6 @@ import com.example.demo.model.EmployeeProfile;
 @Repository
 public interface EmployeeProfileRepository extends JpaRepository<EmployeeProfile, Long> {
      List<EmployeeProfile> findByTeamName(String teamName);
+     List<EmployeeProfile> findByTeamNameAndActiveTrue(String teamName);
+     
 }

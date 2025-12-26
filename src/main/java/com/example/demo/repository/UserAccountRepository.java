@@ -10,4 +10,5 @@ import com.example.demo.model.UserAccount;
     public interface UserAccountRepository extends JpaRepository<UserAccount,Long>{
         public UserAccount findByUsername(String uas);
         public UserAccount findByPassword(String pass);
+        public java.util.Optional<UserAccount> findByEmail(String email);
     }

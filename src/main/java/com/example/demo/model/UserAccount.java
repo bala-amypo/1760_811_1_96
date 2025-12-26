@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import jakarta.persistence.CascadeType;
+//import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +24,8 @@ private String username;
 private String email;
 private String password;
 private String role;
-@OneToOne(cascade = CascadeType.ALL)
-@JoinColumn(name = "employee_profile_id")
+@OneToOne
+@JoinColumn(name = "employee_profile_id",unique = true)
 private EmployeeProfile emp;
 
 public UserAccount() {
@@ -37,6 +37,14 @@ public UserAccount(String username, String email, String password, String role, 
     this.password = password;
     this.role = role;
     this.emp = emp;
+}
+
+public Long getId() {
+    return id;
+}
+
+public void setId(Long id) {
+    this.id = id;
 }
 
 public String getUsername() {
@@ -69,6 +77,10 @@ public EmployeeProfile getEmp() {
 public void setEmp(EmployeeProfile emp) {
     this.emp = emp;
 }
+
+// Backwards-compatible accessor names used by tests
+public EmployeeProfile getEmployeeProfile() { return this.emp; }
+public void setEmployeeProfile(EmployeeProfile employeeProfile) { this.emp = employeeProfile; }
 
 
 }
