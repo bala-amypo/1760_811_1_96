@@ -20,3 +20,4 @@ public class TeamCapacityServiceImpl implements TeamCapacityService {
         return "Your team: " + teamName+" has low capacity workers so leave request has been cancelled.";
     }
 }
+    

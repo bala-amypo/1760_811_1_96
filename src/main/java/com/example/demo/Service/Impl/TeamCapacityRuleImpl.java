@@ -5,11 +5,11 @@
 
     import com.example.demo.Service.TeamCapacityRuleService;
     import com.example.demo.model.TeamCapacityRule;
-    import com.example.demo.repository.TeamCapacityConfigRepository;
+    import com.example.demo.repository.TeamCapacityRuleRepository;
     @Service
     public class TeamCapacityRuleImpl implements TeamCapacityRuleService {
         @Autowired
-        TeamCapacityConfigRepository tccr;
+        TeamCapacityRuleRepository tccr;
 
         @Override
         public TeamCapacityRule create(TeamCapacityRule tcr){
