@@ -24,7 +24,7 @@ private String username;
 private String email;
 private String password;
 private String role;
-@OneToOne(cascade = CascadeType.MERGE)
+@OneToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "employee_profile_id")
 private EmployeeProfile emp;
 
