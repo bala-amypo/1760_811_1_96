@@ -3,8 +3,8 @@ package com.example.demo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Service.TeamCapacityService;
 import com.example.demo.repository.UserAccountRepository;
+import com.example.demo.service.TeamCapacityService;
 
 @Service
 public class TeamCapacityServiceImpl implements TeamCapacityService {
@@ -20,4 +20,3 @@ public class TeamCapacityServiceImpl implements TeamCapacityService {
         return "Your team: " + teamName+" has low capacity workers so leave request has been cancelled.";
     }
 }
-    

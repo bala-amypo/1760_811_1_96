@@ -5,11 +5,11 @@ package com.example.demo.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.Service.LeaveRequestService;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.EmployeeProfile;
 import com.example.demo.model.LeaveRequest;
 import com.example.demo.repository.LeaveRequestRepository;
+import com.example.demo.service.LeaveRequestService;
 import com.example.demo.repository.EmployeeProfileRepository;
 @Service
 public class LeaveRequestImpl implements LeaveRequestService{

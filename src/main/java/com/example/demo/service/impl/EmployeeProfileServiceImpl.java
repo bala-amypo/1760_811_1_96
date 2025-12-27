@@ -8,7 +8,7 @@ import com.example.demo.repository.EmployeeProfileRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EmployeeProfileServiceImpl implements com.example.demo.Service.EmployeeProfileService {
+public class EmployeeProfileServiceImpl implements com.example.demo.service.EmployeeProfileService {
     private final EmployeeProfileRepository repo;
 
     public EmployeeProfileServiceImpl(EmployeeProfileRepository repo) { this.repo = repo; }

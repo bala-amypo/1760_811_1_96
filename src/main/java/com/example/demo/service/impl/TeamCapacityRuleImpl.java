@@ -3,9 +3,9 @@
     import org.springframework.beans.factory.annotation.Autowired;
     import org.springframework.stereotype.Service;
 
-    import com.example.demo.Service.TeamCapacityRuleService;
-    import com.example.demo.model.TeamCapacityRule;
+import com.example.demo.model.TeamCapacityRule;
     import com.example.demo.repository.TeamCapacityRuleRepository;
+import com.example.demo.service.TeamCapacityRuleService;
     @Service
     public class TeamCapacityRuleImpl implements TeamCapacityRuleService {
         @Autowired
