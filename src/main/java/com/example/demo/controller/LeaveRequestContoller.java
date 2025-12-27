@@ -1,4 +1,4 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Service.LeaveRequestService;
+import com.example.demo.service.LeaveRequestService;
 import com.example.demo.dto.LeaveRequestDto;
 import org.springframework.web.bind.annotation.RequestBody;
 

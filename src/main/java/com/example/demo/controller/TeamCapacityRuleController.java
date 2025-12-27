@@ -1,10 +1,10 @@
-package com.example.demo.Controller;
+package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.Service.TeamCapacityRuleService;
+import com.example.demo.service.TeamCapacityRuleService;
 import com.example.demo.model.TeamCapacityRule;
 
 
