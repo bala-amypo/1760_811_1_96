@@ -4,9 +4,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.service.TeamCapacityRuleService;
 import com.example.demo.model.TeamCapacityRule;
-
+import com.example.demo.service.TeamCapacityRuleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
