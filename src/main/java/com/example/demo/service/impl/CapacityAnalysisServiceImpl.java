@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.HashMap;
 //import java.util.stream.Collectors;
 
-public class CapacityAnalysisServiceImpl implements com.example.demo.Service.CapacityAnalysisService {
+public class CapacityAnalysisServiceImpl implements com.example.demo.service.CapacityAnalysisService {
     private final TeamCapacityConfigRepository configRepo;
     private final EmployeeProfileRepository employeeRepo;
     private final LeaveRequestRepository leaveRepo;
